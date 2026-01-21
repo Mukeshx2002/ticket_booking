@@ -1,0 +1,262 @@
+paths:
+  /ticket/list:
+    get:
+      tags:
+        - Ticket
+      summary: Get all tickets
+      responses:
+        "200":
+          description: Ticket details
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /ticket/create:
+    post:
+      tags:
+        - Ticket
+      summary: "Add ticket"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                  example: 1
+                  description: ID of the user who created the ticket
+                eventId:
+                  type: number
+                  example: 1
+                  description: ID of the event to which the ticket belongs
+                seats:
+                  type: array
+                  items:
+                    type: string
+                    format: string
+                  example: ["A1", "A2", "A3"]
+                price:
+                  type: number
+                  example: 100.00
+      responses:
+        "200":
+          description: Ticket created successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /ticket/update/{id}:
+    put:
+      tags:
+        - Ticket
+      summary: "Update ticket"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                  example: 1
+                  description: ID of the user who created the ticket
+                eventId:
+                  type: number
+                  example: 1
+                  description: ID of the event to which the ticket belongs
+                seats:
+                  type: array
+                  items:
+                    type: string
+                    format: string
+                  example: ["A1", "A2", "A3"]
+                price:
+                  type: number
+                  example: 100.00
+      responses:
+        "200":
+          description: Ticket details
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /ticket/delete/{id}:
+    delete:
+      tags:
+        - Ticket
+      summary: "Delete ticket"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket deleted successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /ticket/{id}:
+    get:
+      tags:
+        - Ticket
+      summary: "Get ticket by id"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket details
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+  /ticket/filter:
+    post:
+      tags:
+        - Ticket
+      summary: "Filter tickets"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    userId:
+                      type: integer
+                      example: 1
+                    eventId:
+                      type: integer
+                      example: 1
+                    seats:
+                      type: array
+                      items:
+                        type: string
+                        example: "A1"
+                    lessThanPrice:
+                      type: number
+                      example: 1
+                    greaterThanPrice:
+                      type: number
+                      example: 1
+                    equalToPrice:
+                      type: number
+                      example: 1
+                    search:
+                      type: string
+                      example: "John Doe"
+                    softDelete:
+                      type: boolean
+                      example: false
+                sort:
+                  type: object
+                  properties:
+                    sortBy:
+                      type: string
+                      example: "createdAt"
+                    orderBy:
+                      type: string
+                      enum: ["ASC", "DESC"]
+                      example: "DESC"
+      responses:
+        "200":
+          description: Events filtered successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+  /ticket/filter-page:
+    post:
+      tags:
+        - Ticket
+      summary: "Filter tickets by pagination"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    userId:
+                      type: integer
+                      example: 1
+                    eventId:
+                      type: integer
+                      example: 1
+                    seats:
+                      type: array
+                      items:
+                        type: string
+                        example: "A1"
+                    lessThanPrice:
+                      type: number
+                      example: 1
+                    greaterThanPrice:
+                      type: number
+                      example: 1
+                    equalToPrice:
+                      type: number
+                      example: 1
+                    search:
+                      type: string
+                      example: "John Doe"
+                    softDelete:
+                      type: boolean
+                      example: false
+                sort:
+                  type: object
+                  properties:
+                    sortBy:
+                      type: string
+                      example: "createdAt"
+                    orderBy:
+                      type: string
+                      enum: ["ASC", "DESC"]
+                      example: "DESC"
+                page:
+                  type: object
+                  properties:
+                    pageNumber:
+                      type: integer
+                      example: 0
+                    pageLimit:
+                      type: integer
+                      example: 10
+      responses:
+        "200":
+          description: Tickets filtered successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error

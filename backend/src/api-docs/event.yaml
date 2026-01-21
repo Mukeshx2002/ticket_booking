@@ -1,0 +1,354 @@
+paths:
+  /event/list:
+    get:
+      tags:
+        - Event
+      summary: Get all events
+      responses:
+        "200":
+          description: Event list retrieved successfullys
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /event/{id}:
+    get:
+      tags:
+        - Event
+      summary: "Get event by id"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Event details
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /event/create:
+    post:
+      tags:
+        - Event
+      summary: "Add event"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Event title"
+                description:
+                  type: string
+                  example: "Description of the event"
+                date:
+                  type: string
+                  example: "2025-12-25"
+                time:
+                  type: string
+                  example: "00:00:00"
+                capacity:
+                  type: integer
+                  example: 100
+                booked:
+                  type: integer
+                  example: 0
+                price:
+                  type: number
+                  example: 100.00
+                status:
+                  type: string
+                  enum: ["LAUNCHED", "CANCELLED", "CONFIRMED", "PENDING"]
+                  example: "PENDING"
+                active:
+                  type: boolean
+                  example: true
+      responses:
+        "200":
+          description: Event updated successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /event/update/{id}:
+    put:
+      tags:
+        - Event
+      summary: "Update event"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Event title"
+                description:
+                  type: string
+                  example: "Description of the event"
+                date:
+                  type: string
+                  example: "2025-12-25"
+                time:
+                  type: string
+                  example: "00:00:00"
+                capacity:
+                  type: integer
+                  example: 100
+                booked:
+                  type: integer
+                  example: 0
+                price:
+                  type: number
+                  example: 100.00
+                status:
+                  type: string
+                  enum: ["LAUNCHED", "CANCELLED", "CONFIRMED", "PENDING"]
+                  example: "PENDING"
+                active:
+                  type: boolean
+                  example: true
+      responses:
+        "200":
+          description: Event created successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /event/delete/{id}:
+    delete:
+      tags:
+        - Event
+      summary: "Delete event"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Event deleted successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+  /event/filter:
+    post:
+      tags:
+        - Event
+      summary: "Filter events"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    startDate:
+                      type: string
+                      format: date
+                    endDate:
+                      type: string
+                      format: date
+                    startTime:
+                      type: string
+                      format: time
+                    endTime:
+                      type: string
+                      format: time
+                    lessThanCapicity:
+                      type: number
+                      example: 1
+                    greaterThanCapicity:
+                      type: number
+                      example: 1
+                    equalToCapicity:
+                      type: number
+                      example: 1
+                    lessThanBooked:
+                      type: number
+                      example: 1
+                    greaterThanBooked:
+                      type: number
+                      example: 1
+                    equalToBooked:
+                      type: number
+                      example: 1
+                    lessThanPrice:
+                      type: number
+                      example: 1
+                    greaterThanPrice:
+                      type: number
+                      example: 1
+                    equalToPrice:
+                      type: number
+                      example: 1
+                    status:
+                      type: string
+                      enum: ["PENDING", "CANCELLED", "CONFIRMED", "LAUNCHED"]
+                      example: "PENDING"
+                    active:
+                      type: boolean
+                      example: true
+                    search:
+                      type: string
+                      example: "string"
+                    softDelete:
+                      type: boolean
+                      example: false
+                sort:
+                  type: object
+                  properties:
+                    sortBy:
+                      type: string
+                      example: "createdAt"
+                    orderBy:
+                      type: string
+                      enum: ["ASC", "DESC"]
+                      example: "DESC"
+      responses:
+        "200":
+          description: Events filtered successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+  /event/filter-page:
+    post:
+      tags:
+        - Event
+      summary: "Filter events by pagination"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    startDate:
+                      type: string
+                      format: date
+                    endDate:
+                      type: string
+                      format: date
+                    startTime:
+                      type: string
+                      format: time
+                    endTime:
+                      type: string
+                      format: time
+                    lessThanCapicity:
+                      type: number
+                      example: 1
+                    greaterThanCapicity:
+                      type: number
+                      example: 1
+                    equalToCapicity:
+                      type: number
+                      example: 1
+                    lessThanBooked:
+                      type: number
+                      example: 1
+                    greaterThanBooked:
+                      type: number
+                      example: 1
+                    equalToBooked:
+                      type: number
+                      example: 1
+                    lessThanPrice:
+                      type: number
+                      example: 1
+                    greaterThanPrice:
+                      type: number
+                      example: 1
+                    equalToPrice:
+                      type: number
+                      example: 1
+                    status:
+                      type: string
+                      enum: ["PENDING", "CANCELLED", "CONFIRMED", "LAUNCHED"]
+                      example: "PENDING"
+                    active:
+                      type: boolean
+                      example: true
+                    search:
+                      type: string
+                      example: "string"
+                    softDelete:
+                      type: boolean
+                      example: false
+                sort:
+                  type: object
+                  properties:
+                    sortBy:
+                      type: string
+                      example: "createdAt"
+                    orderBy:
+                      type: string
+                      enum: ["ASC", "DESC"]
+                      example: "DESC"
+                page:
+                  type: object
+                  properties:
+                    pageNumber:
+                      type: integer
+                      example: 0
+                    pageLimit:
+                      type: integer
+                      example: 10
+      responses:
+        "200":
+          description: Events filtered successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+  /event/dashboard:
+    get:
+      summary: Get dashboard data
+      tags:
+        - Event
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Dashboard data retrieved successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
