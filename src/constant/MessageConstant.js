@@ -1,0 +1,81 @@
+const { ValidationErrorItemOrigin } = require("sequelize");
+
+const MessageConstant = {
+  //COMMON
+  SUCCESS: "SUCCESS",
+  ERROR: "ERROR",
+  SUCCESS_DESCRIPTION: "Success",
+  CREATED: "Created successfully",
+  UPDATED: "Updated successfully",
+  DELETED: "Deleted successfully",
+  OK: "OK",
+  INVALID_REQUEST: "Invalid request",
+  NOT_FOUND_DESCRIPTION: "The requested resource was not found",
+  INTERNAL_SERVER_ERROR: "Internal server error",
+
+  //USER
+  USER_CREATED: "User created successfully",
+  USER_NOT_FOUND: "User not found",
+  USER_ALREADY_EXISTS: "User already exists",
+  USER_DELETED: "User deleted successfully",
+  USER_UPDATED: "User updated successfully",
+  PASSWORD_DOES_NOT_MATCH: "Password does not match",
+  EMAIL_ALREADY_EXISTS: "Email already exists",
+  LOGIN_SUCCESS: "Login successful",
+  EMAIL_REQUIRED: "Email is required",
+  INVALID_EMAIL: "Invalid email",
+  PASSWORD_REQUIRED: "Password is required",
+  NAME_REQUIRED: "Name is required",
+  PHONE_NUMBER_REQUIRED: "Phone number is required",
+  EMAIL_TOO_SHORT: "Email must be at least 5 characters long",
+  EMAIL_TOO_LONG: "Email must be at most 255 characters long",
+  PASSWORD_TOO_SHORT: "Password must be at least 8 characters long",
+  PASSWORD_TOO_LONG: "Password must be at most 1024 characters long",
+  NAME_TOO_SHORT: "Name must be at least 2 characters long",
+  NAME_TOO_LONG: "Name must be at most 255 characters long",
+  PHONE_NUMBER_MUST_BE_10_DIGITS:
+    "Phone number must be at least 10 digits long",
+  USER_ID_IS_REQUIRED: "User ID is required",
+  USER_ID_MUST_BE_A_NUMBER: "User ID must be a number",
+  USER_ID_MUST_BE_POSITIVE: "User ID must be a positive number",
+
+  //EVENT
+  EVENT_NOT_FOUND: "Event not found",
+  EVENT_DELETED: "Event deleted successfully",
+  EVENT_UPDATED: "Event updated successfully",
+  EVENT_CREATED: "Event created successfully",
+  EVENT_ID_IS_REQUIRED: "Event ID is required",
+  EVENT_ID_MUST_BE_A_NUMBER: "Event ID must be a number",
+  EVENT_ID_MUST_BE_POSITIVE: "Event ID must be a positive number",
+  TIME_CANNOT_BE_IN_THE_PAST: "Time cannot be in the past",
+  TIME_IS_REQUIRED: "Time is required",
+  TIME_MUST_BE_A_STRING: "Time must be a string",
+  PLEASE_ENTER_A_VALID_TIME: "Please enter a valid time HH:MM",
+  DATE_IS_REQUIRED: "Date is required",
+  DATE_CANNOT_BE_IN_THE_PAST: "Date cannot be in the past",
+  EVENT_TITLE_MUST_BE_A_STRING: "Event title must be a string",
+  EVENT_TITLE_REQUIRED: "Event title is required",
+  EVENT_DESCRIPTION_MUST_BE_A_STRING: "Event description must be a string",
+  EVENT_DESCRIPTION_REQUIRED: "Event description is required",
+  CAPACITY_MUST_BE_A_NUMBER: "Capacity must be a number",
+  CAPACITY_MUST_BE_POSITIVE: "Capacity must be a positive number",
+  INVALID_DATE_FORMAT: "Invalid date format (YYYY-MM-DD)",
+
+  // TICKET
+  TICKET_NOT_FOUND: "Ticket not found",
+  TICKET_DELETED: "Ticket deleted successfully",
+  TICKET_CREATED: "Ticket created successfully",
+  TICKET_UPDATED: "Ticket updated successfully",
+  SEAT_IS_REQUIRED: "Seat is required",
+  SEAT_MUST_BE_A_STRING: "Seat must be a string",
+  SEAT_MUST_BE_AN_ARRAY: "Seats must be an array",
+  AT_LEAST_ONE_SEAT_MUST_BE_SELECTED: "At least one seat must be selected",
+  SEAT_CAN_NOT_BE_EMPTY: "Seat can not be empty",
+  PRICE_IS_REQUIRED: "Price is required",
+  PRICE_MUST_BE_A_NUMBER: "Price must be a number",
+  PRICE_MUST_BE_POSITIVE: "Price must be a positive number",
+  SEAT_ALREADY_BOOKED: (seats, eventTitle) =>
+    `Seat ${seats.join(", ")} already booked for event ${eventTitle}`,
+};
+
+module.exports = MessageConstant;

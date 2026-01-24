@@ -1,0 +1,267 @@
+paths:
+  /user/list:
+    get:
+      tags:
+        - User
+      summary: Get all users
+      responses:
+        "200":
+          description: A list of users
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /user/add:
+    post:
+      tags:
+        - User
+      summary: "Add user"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "example@gmail.com"
+                password:
+                  type: string
+                  example: "123"
+                name:
+                  type: string
+                  example: "John Doe"
+                phone:
+                  type: string
+                  example: "1234567890"
+      responses:
+        "200":
+          description: User created successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /user/{id}:
+    put:
+      tags:
+        - User
+      summary: "Update user"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "example@gmail.com"
+                password:
+                  type: string
+                  example: "123"
+                name:
+                  type: string
+                  example: "John Doe"
+                phone:
+                  type: string
+                  example: "1234567890"
+      responses:
+        "200":
+          description: User updated successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+    delete:
+      tags:
+        - User
+      summary: "Delete user"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User deleted successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+    get:
+      tags:
+        - User
+      summary: "Get user by id"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User retrieved successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  /user/login:
+    post:
+      tags:
+        - User
+      summary: "Login user"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "example@gmail.com"
+                password:
+                  type: string
+                  example: "123"
+      responses:
+        "200":
+          description: User logged in successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+  /user/filter:
+    post:
+      tags:
+        - User
+      summary: "Filter users"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    email:
+                      type: string
+                      example: "example@gmail.com"
+                    name:
+                      type: string
+                      example: "John Doe"
+                    phone:
+                      type: string
+                      example: "1234567890"
+                    role:
+                      type: string
+                      example: "admin"
+                    isActive:
+                      type: boolean
+                      example: true
+                    search:
+                      type: string
+                      example: "string"
+                    softDelete:
+                      type: boolean
+                      example: false
+                sort:
+                  type: object
+                  properties:
+                    sortBy:
+                      type: string
+                      example: "createdAt"
+                    orderBy:
+                      type: string
+                      enum: ["ASC", "DESC"]
+                      example: "DESC"
+      responses:
+        "200":
+          description: Users filtered successfully
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+/user/filter-page:
+  post:
+    tags:
+      - User
+    summary: "Filter users"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              filter:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  email:
+                    type: string
+                    example: "example@gmail.com"
+                  name:
+                    type: string
+                    example: "John Doe"
+                  phone:
+                    type: string
+                    example: "1234567890"
+                  role:
+                    type: string
+                    example: "admin"
+                  isActive:
+                    type: boolean
+                    example: true
+                  search:
+                    type: string
+                    example: "string"
+                  softDelete:
+                    type: boolean
+                    example: false
+              sort:
+                type: object
+                properties:
+                  sortBy:
+                    type: string
+                    example: "createdAt"
+                  orderBy:
+                    type: string
+                    enum: ["ASC", "DESC"]
+                    example: "DESC"
+              page:
+                type: object
+                properties:
+                  pageNumber:
+                    type: integer
+                    example: 0
+                  pageLimit:
+                    type: integer
+                    example: 10
+    responses:
+      "200":
+        description: Users filtered successfully
+      "400":
+        description: Bad request
+      "500":
+        description: Internal server error
