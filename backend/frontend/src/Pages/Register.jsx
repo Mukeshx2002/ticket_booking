@@ -31,56 +31,27 @@ const Register = () => {
         } else if (!/^[0-9]{10}$/.test(formData.phone)) {
             newErrors.phone = "Enter 10 digit number";
         }
-        // if (!formData.password.trim()) {
-        //     newErrors.password = "Password is required";
-        // } else if (formData.password.length < 6) {
-        //     newErrors.password = "Minimum 6 characters required";
-        // }
-
         if (!formData.password.trim()) {
             newErrors.password = "Password is required";
-          } else if (formData.password.length < 8) {
-            newErrors.password = "Minimum 8 characters required";
-          }
-          
+        } else if (formData.password.length < 6) {
+            newErrors.password = "Minimum 6 characters required";
+        }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-    // const handleSubmit = async () => {
-    //     if (!validate()) return;
-    //     const res = await Apiservice.post("user/add", { ...formData, role: "user" });
-    //     setFormData({
-    //         name: "",
-    //         email: "",
-    //         phone: "",
-    //         password: ""
-    //     })
-    //     setErrors({})
-    //     navigate('/login')
-    // }
-
     const handleSubmit = async () => {
         if (!validate()) return;
-      
-        try {
-          const res = await Apiservice.post("user/add", formData);
-      
-          setFormData({
+        const res = await Apiservice.post("users/add", { ...formData, role: "user" });
+        setFormData({
             name: "",
             email: "",
             phone: "",
             password: ""
-          });
-      
-          setErrors({});
-          navigate("/login");
-        } catch (error) {
-          console.error(error);
-          alert(error?.response?.data?.data || "Registration failed");
-        }
-      };
-      
+        })
+        setErrors({})
+        navigate('/login')
+    }
 
     const handleInputchange = (e) => {
         setFormData({

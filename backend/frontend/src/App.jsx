@@ -45,7 +45,7 @@ function App() {
     // Admin routes
     {
       path:"admin",
-      element: <AuthGuard requiredAuth={true} allowedRoles={["ADMIN"]}><AdminLayout /></AuthGuard>,
+      element: <AuthGuard requiredAuth={true} allowedRoles={["admin"]}><AdminLayout /></AuthGuard>,
       children: [
         {path: "dashboard", element: <AdminDashboard/>},
         {path: "bookings", element: <Booking />},

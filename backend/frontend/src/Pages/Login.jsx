@@ -41,7 +41,6 @@ const Login = () => {
   const handleLogin = async() => {
     if (!validate()) return;
     try {
-      
       const res = await Apiservice.post("user/login", { ...form, role });
       console.log(res)
       localStorage.setItem("authData",JSON.stringify(res.data))
